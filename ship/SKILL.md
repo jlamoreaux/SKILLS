@@ -157,8 +157,23 @@ Launch a subagent:
 > "Implement [Task N: title] for this feature: $ARGUMENTS. PRD: `.claude/ship/PRD.md`. Tasks:
 > `.claude/ship/TASKS.md`. Implement only the subtasks under Task N. Follow CLAUDE.md conventions
 > if present. Apply code-quality standards: names reveal intent, no implicit `any`, no swallowed
-> errors, no floating promises, no magic values, small focused functions, no dead code. After all
-> subtasks, write tests for the new functionality. Return a list of all files created or modified."
+> errors, no floating promises, no magic values, small focused functions, no dead code.
+>
+> **External libraries.** If you reach for a new external library — or an unfamiliar API surface of
+> one already in the project — fetch the official docs first to confirm (a) the latest stable
+> version and (b) the current correct usage. Do not code from memory: APIs drift, recommended
+> patterns change, and stale recollection produces subtly wrong code. Pin the version you verified
+> in whatever manifest the project uses (`package.json`, `pyproject.toml`, `Cargo.toml`, etc.).
+>
+> **Comments.** Don't write comments that explain *what* the code does — well-named identifiers
+> handle that. Only add a comment when there's a non-obvious *why*: a hidden constraint, an
+> invariant being preserved, a workaround for a specific bug, or behavior that would surprise a
+> future reader. Exceptions: type definitions and JSDoc/docstring blocks on public APIs are
+> expected and may describe *what*. Beyond these rules, follow the surrounding codebase's
+> commenting conventions.
+>
+> After all subtasks, write tests for the new functionality. Return a list of all files created or
+> modified."
 
 ### Step B — Quality Gates (run in order — fix before advancing)
 
