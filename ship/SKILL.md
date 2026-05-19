@@ -89,6 +89,16 @@ Write `.claude/ship/TASKS.md`. Rules:
 - Tasks ordered so dependencies flow forward (nothing requires code from a later task).
 - Each task is one focused implementation unit.
 - Every task block includes a dedicated test subtask — never combine implementation and tests.
+- **Sweep for docs the implementation will make factually wrong.** Before finalizing the
+  task list, grep the repo's existing docs (top-level `README.md`/`CLAUDE.md`, anything
+  under `docs/`, `agent.md` / `AGENTS.md` files, `.env.example`, feature-flag tables,
+  roadmaps, integration-status files) for content the planned changes will invalidate —
+  closed todos, "no way to do X" claims that will no longer be true, method enumerations
+  that will be incomplete, env-var lists that will be missing entries. Add a single
+  doc-update task covering all of them, scheduled after the implementation tasks but
+  before the verification gate so wording can cite as-shipped behavior. Do NOT create new
+  docs or add doc-touches for the sake of completeness — only fix existing inaccuracies.
+  If the sweep finds nothing to update, skip the task; do not invent work.
 
 Format:
 ```
